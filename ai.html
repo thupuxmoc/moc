@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Main Site</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0d0d0d;
+      color: #fff;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 36px;
+      color: #e60000;
+      margin-bottom: 10px;
+    }
+
+    .discord-link img {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      height: 30px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px #e60000;
+    }
+
+    hr {
+      border: 0;
+      height: 2px;
+      background: #e60000;
+      margin: 30px 0;
+    }
+
+    .carousel-container {
+      position: relative;
+      overflow: hidden;
+      max-width: 95%;
+      margin: auto;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      gap: 20px;
+    }
+
+    .carousel-card {
+      min-width: 30%;
+      background-color: #1a1a1a;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #e60000;
+      padding: 10px;
+    }
+
+    .carousel-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .carousel-card img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #ff1a1a;
+      cursor: pointer;
+    }
+
+    .nav {
+      position: absolute;
+      top: 40%;
+      transform: translateY(-50%);
+      background-color: rgba(230, 0, 0, 0.8);
+      border: none;
+      color: white;
+      font-size: 28px;
+      padding: 10px 15px;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .nav.prev {
+      left: 0;
+    }
+
+    .nav.next {
+      right: 0;
+    }
+
+    video {
+      margin-top: 40px;
+      border: 3px solid #e60000;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #e60000;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Men Of Culture</h1>
+  <a class="discord-link" href="https://discord.gg/zGeT9Sdk" target="_blank">
+    <img src="https://static.vecteezy.com/system/resources/previews/006/892/625/non_2x/discord-logo-icon-editorial-free-vector.jpg" alt="Discord" />
+  </a>
+  <hr />
+
+  <!-- 🔁 Carousel Section -->
+  <div class="carousel-container">
+    <button class="nav prev">&#10094;</button>
+
+    <div class="carousel-track">
+      <div class="carousel-card">
+        <a href="https://hentaimama.io/tvshows/gishi-wa-yan-mama-junyuu-chuu/">
+          <img src="https://hentaimama.io/wp-content/uploads/2020/06/3.jpg" alt="Gishi wa Yan Mama" />
+        </a>
+      </div>
+      <div class="carousel-card">
+        <a href="https://hentaimama.io/tvshows/kaede-suzu-animation/">
+          <img src="https://hentaimama.io/wp-content/uploads/2022/03/kaede_1.jpg" alt="Kaede to Suzu" />
+        </a>
+      </div>
+      <div class="carousel-card">
+        <a href="https://hentaimama.io/tvshows/uchi-no-otouto-maji-de-dekain-dakedo-mi-ni-konai/">
+          <img src="https://hentaimama.io/wp-content/uploads/2021/04/2.jpg" alt="Uchi no Otouto" />
+        </a>
+      </div>
+      <div class="carousel-card">
+        <a href="https://hentaimama.io/tvshows/gishi-wa-yan-mama-junyuu-chuu/">
+          <img src="https://hentaimama.io/wp-content/uploads/2020/06/3.jpg" alt="Gishi wa Yan Mama" />
+        </a>
+      </div>
+      <div class="carousel-card">
+        <a href="https://hentaimama.io/tvshows/kaede-suzu-animation/">
+          <img src="https://hentaimama.io/wp-content/uploads/2022/03/kaede_1.jpg" alt="Kaede to Suzu" />
+        </a>
+      </div>
+      <div class="carousel-card">
+        <a href="https://hentaimama.io/tvshows/uchi-no-otouto-maji-de-dekain-dakedo-mi-ni-konai/">
+          <img src="https://hentaimama.io/wp-content/uploads/2021/04/2.jpg" alt="Uchi no Otouto" />
+        </a>
+      </div>
+      <!-- You can add more cards here -->
+    </div>
+
+    <button class="nav next">&#10095;</button>
+  </div>
+
+  <hr>
+
+  <!-- 📽️ Video Player -->
+  <video src="GishiwaYanMamaJunyuuChuu01.mp4" autoplay controls width="900"></video>
+
+  <script>
+    const track = document.querySelector('.carousel-track');
+    const prev = document.querySelector('.nav.prev');
+    const next = document.querySelector('.nav.next');
+    const cards = document.querySelectorAll('.carousel-card');
+    let currentIndex = 0;
+    const cardWidth = cards[0].offsetWidth + 20;
+    const cardsPerView = 3;
+
+    next.addEventListener('click', () => {
+      if (currentIndex < cards.length - cardsPerView) {
+        currentIndex++;
+        updateSlide();
+      }
+    });
+
+    prev.addEventListener('click', () => {
+      if (currentIndex > 0) {
+        currentIndex--;
+        updateSlide();
+      }
+    });
+
+    function updateSlide() {
+      track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+    }
+
+    window.addEventListener('resize', () => {
+      updateSlide(); // Keeps it working properly when screen resizes
+    });
+  </script>
+
+</body>
+</html>
